@@ -31,7 +31,7 @@ public class Alias {
         this.longUrl = longUrl;
         this.aliasName = aliasName;
         this.creationDate = LocalDate.now();
-        this.creationDate = creationDate.plusDays(3);       // Duration time default is 3 Days
+        this.expirationDate = creationDate.plusDays(3);       // Duration time default is 3 Days
     }
 
     public String getLongUrl() {

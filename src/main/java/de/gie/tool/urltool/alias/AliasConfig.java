@@ -20,12 +20,12 @@ public class AliasConfig {
     @Bean
     CommandLineRunner commandLineRunner(AliasRepository repository){
         return args -> {
-            Alias cat = new Alias("www.cat.de",
-                    "miaw");
-            Alias lion = new Alias("www.lion.com",
-                    "roar");
+            Alias find = new Alias("https://www.google.co.id/",
+                    "findSomething");
+            Alias ask = new Alias("https://stackoverflow.com/",
+                    "askSomething");
 
-            repository.saveAll(List.of(cat, lion));
+            repository.saveAll(List.of(find, ask));
         };
     }
 }

@@ -1,11 +1,13 @@
 package de.gie.tool.urltool.alias;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -21,9 +23,22 @@ public class AliasController {
     }
 
     @GetMapping
-    public List<Alias> getAliases(){
-        return aliasService.getAliases();
+    public ResponseEntity<Object> redirect(@RequestParam String name){
+        String longUrl  = aliasService.getLongUrl(name);
+
+        if (longUrl != null){
+            try {
+                URI redirectionURI      = new URI(longUrl);
+                HttpHeaders httpHeaders = new HttpHeaders();
+                httpHeaders.setLocation(redirectionURI);
+                return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 
     @PostMapping
     public String addAliases(){
