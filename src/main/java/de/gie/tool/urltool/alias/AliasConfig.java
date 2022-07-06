@@ -21,11 +21,9 @@ public class AliasConfig {
     CommandLineRunner commandLineRunner(AliasRepository repository){
         return args -> {
             Alias cat = new Alias("www.cat.de",
-                    "miaw",
-                    30);
+                    "miaw");
             Alias lion = new Alias("www.lion.com",
-                    "roar",
-                    10);
+                    "roar");
 
             repository.saveAll(List.of(cat, lion));
         };

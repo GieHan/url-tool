@@ -2,6 +2,7 @@ package de.gie.tool.urltool.alias;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class AliasController {
     @GetMapping
     public List<Alias> getAliases(){
         return aliasService.getAliases();
+    }
+
+    @PostMapping
+    public String addAliases(){
+        aliasService.add();
+        return "200";
     }
 }

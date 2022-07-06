@@ -18,4 +18,7 @@ public class AliasService {
     public List<Alias> getAliases(){
         return aliasRepository.findAll();
     }
+
+    public void add(){
+    }
 }

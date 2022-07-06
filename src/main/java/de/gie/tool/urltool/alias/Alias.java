@@ -21,25 +21,17 @@ public class Alias {
     private Long id;
     private String longUrl;
     private String aliasName;
-    private int durationTime;
     private LocalDate creationDate;
+    private LocalDate expirationDate;
 
     public Alias() {
     }
 
-    public Alias(String longUrl, String aliasUrl, int durationTime) {
+    public Alias(String longUrl, String aliasName) {
         this.longUrl = longUrl;
-        this.aliasName = aliasUrl;
-        this.durationTime = durationTime;
+        this.aliasName = aliasName;
         this.creationDate = LocalDate.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.creationDate = creationDate.plusDays(3);       // Duration time default is 3 Days
     }
 
     public String getLongUrl() {
@@ -58,29 +50,31 @@ public class Alias {
         this.aliasName = aliasName;
     }
 
-    public int getDurationTime() {
-        return durationTime;
-    }
-
-    public void setDurationTime(int durationTime) {
-        this.durationTime = durationTime;
-    }
-
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setExpirationDate(int duratioInDays) {
+        this.expirationDate = this.creationDate.plusDays(duratioInDays);
     }
 
     @Override
     public String toString() {
         return "Alias{" +
-                "longUrl='" + longUrl + '\'' +
+                "id=" + id +
+                ", longUrl='" + longUrl + '\'' +
                 ", aliasName='" + aliasName + '\'' +
-                ", durationTime=" + durationTime +
                 ", creationDate=" + creationDate +
+                ", expirationDate=" + expirationDate +
                 '}';
     }
+
 }
