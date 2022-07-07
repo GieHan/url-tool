@@ -1,10 +1,12 @@
 package de.gie.tool.urltool.alias;
 
+import de.gie.tool.urltool.alias.model.Alias;
+import de.gie.tool.urltool.alias.model.AliasDTO;
+import de.gie.tool.urltool.alias.model.AliasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.ListIterator;
 
 /*
     Bussiness logic
@@ -23,8 +25,9 @@ public class AliasService {
         return aliasRepository.findAll();
     }
 
-    public boolean add(){
-        return false;
+    public void add(AliasDTO aliasDTO){
+        Alias newAlias = new Alias(aliasDTO.getLongUrl(), aliasDTO.getAliasName(), aliasDTO.getDuration());
+        aliasRepository.save(newAlias);
     }
 
     public boolean delete(){

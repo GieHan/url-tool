@@ -1,9 +1,11 @@
 package de.gie.tool.urltool.alias;
 
+import de.gie.tool.urltool.alias.model.AliasDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -41,8 +43,9 @@ public class AliasController {
 
 
     @PostMapping
-    public String addAliases(){
-        aliasService.add();
-        return "200";
+    public ResponseEntity<AliasDTO> addAliases(@Validated @RequestBody AliasDTO aliasDTO){
+        aliasService.add(aliasDTO);
+        return new ResponseEntity<>(aliasDTO, HttpStatus.OK);
     }
+
 }

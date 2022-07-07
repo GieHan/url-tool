@@ -1,4 +1,4 @@
-package de.gie.tool.urltool.alias;
+package de.gie.tool.urltool.alias.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,6 +32,13 @@ public class Alias {
         this.aliasName = aliasName;
         this.creationDate = LocalDate.now();
         this.expirationDate = creationDate.plusDays(3);       // Duration time default is 3 Days
+    }
+
+    public Alias(String longUrl, String aliasName, int durationInDays) {
+        this.longUrl = longUrl;
+        this.aliasName = aliasName;
+        this.creationDate = LocalDate.now();
+        this.expirationDate = creationDate.plusDays(durationInDays);
     }
 
     public String getLongUrl() {

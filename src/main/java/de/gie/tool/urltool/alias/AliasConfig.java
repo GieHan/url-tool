@@ -1,5 +1,7 @@
 package de.gie.tool.urltool.alias;
 
+import de.gie.tool.urltool.alias.model.Alias;
+import de.gie.tool.urltool.alias.model.AliasRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
