@@ -25,9 +25,15 @@ public class AliasService {
         return aliasRepository.findAll();
     }
 
-    public void add(AliasDTO aliasDTO){
+    public Boolean add(AliasDTO aliasDTO){
+
+        // check if aliasName already there
+        if (aliasRepository.findByAliasName(aliasDTO.getAliasName()).size() != 0 ) {
+            return false;
+        };
+
         Alias newAlias = new Alias(aliasDTO.getLongUrl(), aliasDTO.getAliasName(), aliasDTO.getDuration());
-        aliasRepository.save(newAlias);
+        return aliasRepository.save(newAlias) != null;
     }
 
     public boolean delete(){
@@ -41,14 +47,6 @@ public class AliasService {
         }
 
         return foundedAliases.get(0).getLongUrl();
-    }
-
-    public List<Alias> getName(String text){
-        List<Alias> foundedAliases = aliasRepository.findByAliasName(text);
-        if (foundedAliases.size() != 1){
-            return null;
-        }
-        return foundedAliases;
     }
 
 }

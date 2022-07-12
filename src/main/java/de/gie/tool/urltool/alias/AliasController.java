@@ -48,7 +48,10 @@ public class AliasController {
 
     @PostMapping
     public ResponseEntity<AliasDTO> addAliases(@Validated @RequestBody AliasDTO aliasDTO){
-        aliasService.add(aliasDTO);
+        if (!aliasService.add(aliasDTO)){
+            throw new ApiRequestException("Alias name (" + aliasDTO.getAliasName() + "), is already taken", HttpStatus.BAD_REQUEST);
+        };
+
         return new ResponseEntity<>(aliasDTO, HttpStatus.OK);
     }
 
