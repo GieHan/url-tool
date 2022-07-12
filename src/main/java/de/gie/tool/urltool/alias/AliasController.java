@@ -1,6 +1,7 @@
 package de.gie.tool.urltool.alias;
 
 import de.gie.tool.urltool.alias.model.AliasDTO;
+import de.gie.tool.urltool.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,19 +27,22 @@ public class AliasController {
 
     @GetMapping
     public ResponseEntity<Object> redirect(@RequestParam String name){
-        String longUrl  = aliasService.getLongUrl(name);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        String longUrl          = aliasService.getLongUrl(name);
 
-        if (longUrl != null){
-            try {
-                URI redirectionURI      = new URI(longUrl);
-                HttpHeaders httpHeaders = new HttpHeaders();
-                httpHeaders.setLocation(redirectionURI);
-                return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+
+        if (longUrl == null){
+            throw new ApiRequestException("No alias for " + name, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        try {
+            URI redirectionURI      = new URI(longUrl);
+            httpHeaders.setLocation(redirectionURI);
+        } catch (URISyntaxException e) {
+            throw new ApiRequestException("Something wrong with URI", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
 
