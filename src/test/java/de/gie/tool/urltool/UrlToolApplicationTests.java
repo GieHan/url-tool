@@ -1,13 +1,15 @@
 package de.gie.tool.urltool;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
+//@
 class UrlToolApplicationTests {
 
+
 	@Test
-	void contextLoads() {
+	void simpleTest(){
+//		Assertions.assertEquals(0,0,"must be 0");
 	}
 
 }
