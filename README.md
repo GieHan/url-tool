@@ -27,6 +27,10 @@ Which is means that this project is build with these "things" in mind:
 
 - Java (11)
 - Spring boot
+  - Hibernate
+- JUnit
+- JSON
+- Springdoc & Swagger-UI
 - SQL (PostgreSQL)
 - Docker
 

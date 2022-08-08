@@ -2,6 +2,8 @@ package de.gie.tool.urltool.alias;
 
 import de.gie.tool.urltool.alias.model.Alias;
 import de.gie.tool.urltool.alias.model.AliasRepository;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,7 @@ The example given below shows how to implement the Command Line Runner interface
 
  */
 @Configuration
+@OpenAPIDefinition(info = @Info(title = "Url-tool API", version = "1.0",description = "Url tool microservice"))
 public class AliasConfig {
 
     @Bean
