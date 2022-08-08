@@ -4,6 +4,7 @@ import de.gie.tool.urltool.alias.model.Alias;
 import de.gie.tool.urltool.alias.model.AliasDTO;
 import de.gie.tool.urltool.alias.model.AliasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.List;
  */
 @Service
 public class AliasService {
+
+    @Value("${service.identifier}")
+    private String runtimeID;
 
     private final AliasRepository aliasRepository;
 
@@ -47,6 +51,10 @@ public class AliasService {
         }
 
         return foundedAliases.get(0).getLongUrl();
+    }
+
+    public String getRuntimeIdentifier(){
+        return this.runtimeID;
     }
 
 }

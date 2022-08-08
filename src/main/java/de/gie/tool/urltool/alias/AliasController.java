@@ -3,6 +3,7 @@ package de.gie.tool.urltool.alias;
 import de.gie.tool.urltool.alias.model.AliasDTO;
 import de.gie.tool.urltool.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import java.util.List;
 public class AliasController {
 
     private final AliasService aliasService;
-
 
     @Autowired
     public AliasController(AliasService aliasService) {
@@ -45,7 +45,6 @@ public class AliasController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
-
     @PostMapping
     public ResponseEntity<AliasDTO> addAliases(@Validated @RequestBody AliasDTO aliasDTO){
         if (!aliasService.add(aliasDTO)){
@@ -53,6 +52,11 @@ public class AliasController {
         };
 
         return new ResponseEntity<>(aliasDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity<Object> runtimeID(){
+        return new ResponseEntity<>(aliasService.getRuntimeIdentifier(), HttpStatus.OK);
     }
 
 }
